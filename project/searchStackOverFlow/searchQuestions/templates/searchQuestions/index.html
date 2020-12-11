@@ -1,0 +1,29 @@
+{% extends 'searchQuestions/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+    <form action="{% url 'searchQuestions:index' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.question.errors }}
+        <!-- question_type dropdown -->
+        <h2>Select Question type: </h2>{{ form.question|as_crispy_field }}
+        <div class="alert alert-warning" role="alert">
+            Note: For "Linked" and "Related" type you need to specify
+            ids cause, such type of questions can only be identified
+            by a set of ids.
+          </div>
+        <div>
+        <div class="alert alert-success" role="alert">{{ default }}</div>
+        <div>
+        {{ form.ids.errors }}
+        <!-- ids field to search questions of specific ids -->
+        <h2>Enter the ids if you want to search specific ids of questions:</h2>
+        {{ form.ids|as_crispy_field  }}
+        <p>NOTE:-If you want to search specific ids of questions,
+        enter them with " " separated</p>
+        <!-- search button for questons -->
+        <input class="btn-secondary btn-lg" type="submit" value="Search">
+    </form>
+{% endblock body %}

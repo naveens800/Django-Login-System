@@ -1,0 +1,15 @@
+{% extends 'searchQuestions/base.html' %} 
+
+{% block body %}
+{% if msg %}
+<h1 style =  "align-content: center;">{{ msg }}</h1>
+<form action="{% url 'searchQuestions:results' %}" method="GET" enctype="multipart/form-data">
+    <input type="submit" class="btn  btn-success text-white" value="Get The Results">
+</form>
+{% elif msg2 %}
+<h1 style =  "align-content: center;">{{ msg2 }}</h1>
+<form action="{% url 'searchQuestions:index' %}" method="GET" enctype="multipart/form-data">
+    <input type="submit" class="btn  btn-success text-white" value="Back to Query Again">
+</form>
+{% endif %}
+{% endblock body %}

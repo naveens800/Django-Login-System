@@ -1,0 +1,46 @@
+{% extends 'searchQuestions/base.html' %} 
+
+
+{% block body %}
+
+<!-- Question cards here -->
+{% for item in page_obj  %}
+    {% for keys,value in item.items %}
+        {% ifequal keys 'title' %}
+        
+        <div class="card border border-dark bg-dark text-white text-white">
+            <h5 class="card-header " style="color: rgb(216, 216, 216);">Question title: {{ value }}</h5>{% endifequal %}
+        {% ifequal keys 'question_id'%}
+            <div class="card-body py-0">
+            <h5 class="card-title mt-2"><p class="text-right">Question ID: {{ value }}</p></h5>{% endifequal %}
+        {% ifequal keys 'is_answered'%}
+            <h5 class="card-text">Is Answered: {{ value }}</h5>{% endifequal %}
+        {% ifequal keys 'answer_count'%}
+            <h5 class="card-text">Answer's Count: {{ value }}</h5>{% endifequal %}
+        {% ifequal keys 'link'%}
+            <a href={{ value }} class="btn  btn-success text-white mb-3">Go to stackoverflow</a>{% endifequal %}
+            </div>
+        </div>
+    
+    {% endfor %}
+    
+{% endfor %}
+
+
+
+<!-- pagination part here -->
+<div>
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li><a class="page-link  border border-primary rounded" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        <li class="page-item active ">
+        <span class="page-link">{{page_obj.number}}</span>
+        </li>
+        {% if page_obj.has_next %}
+        <li><a class="page-link border border-primary rounded" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+{% endblock body %}
